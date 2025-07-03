@@ -11,6 +11,9 @@ st.set_page_config(page_title="My Deary", page_icon="🐧", layout="centered")
 idioma = st.selectbox("🌐 Choose your language / Escolha seu idioma", ["Português 🇧🇷", "English 🇺🇸"])
 lang = "pt" if "Português" in idioma else "en"
 
+if lang == 'pt':
+    st.info("ℹ️ Para uma melhor experiência, recomendamos usar em inglês.")
+
 with open("styles/theme.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
