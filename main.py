@@ -7,8 +7,8 @@ import os
 
 st.set_page_config(page_title="My Deary", page_icon="🐧", layout="centered")
 
-# with open("styles/theme.css") as f:
-#     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+with open("styles/theme.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 st.image("assets/mascot.png", width=120, caption="Oi! Eu sou o Deary 🐧", use_container_width=False)
 
