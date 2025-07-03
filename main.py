@@ -2,13 +2,23 @@ import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import numpy as np
+from PIL import Image
+import os
 
-# Carregar modelo e tokenizer
+st.set_page_config(page_title="My Deary", page_icon="🐧", layout="centered")
+
+with open("styles/theme.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+st.image("assets/mascot.png", width=120, caption="Oi! Eu sou o Deary 🐧", use_column_width=False)
+
+st.title("Um amigo para seus desabafos 💗")
+st.markdown("_Versão em testes – aqui pra ouvir você com carinho._")
+
 MODEL_NAME = "cardiffnlp/twitter-roberta-base-emotion"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
 
-# Dicionário de respostas empáticas
 respostas_emocionais = {
     "sadness": {
         "reflexao": "Tudo que pesa agora não precisa ser resolvido hoje. Às vezes, só sentir já é bastante.",
@@ -32,7 +42,6 @@ respostas_emocionais = {
     }
 }
 
-# Função de análise
 def analisar_emocao(texto):
     inputs = tokenizer(texto, return_tensors="pt", truncation=True)
     with torch.no_grad():
@@ -42,17 +51,12 @@ def analisar_emocao(texto):
     emotion_idx = int(np.argmax(probs))
     return labels[emotion_idx], probs[emotion_idx]
 
-# Função para gerar resposta empática
 def gerar_resposta(emocao):
     if emocao not in respostas_emocionais:
         return "Não sei como reagir a esse sentimento ainda... mas estou aqui.", "", ""
     item = respostas_emocionais[emocao]
     return item["reflexao"], item["acao"], item["pergunta"]
 
-
-# Interface Streamlit
-st.set_page_config(page_title="My Deary")
-st.title("Um amigo para seus desabafos. 'Uma versão em testes! :)'")
 
 texto = st.text_area("Escreva como você está se sentindo hoje:")
 
@@ -89,7 +93,7 @@ if texto:
         st.error("⚠️ Detectamos sinais de que você pode estar passando por um momento muito difícil.")
         st.markdown("Você não está sozinha(o). Conversar com alguém pode ajudar.\n\nSe estiver no Brasil, você pode ligar gratuitamente para o **188** (CVV – 24h).")
     st.stop()
-    
+
     emocao, confianca = analisar_emocao(texto)
     if emocao == "joy" and detectar_tristeza_manual(texto):
         emocao = "sadness"
