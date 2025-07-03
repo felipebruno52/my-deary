@@ -50,8 +50,8 @@ def gerar_resposta(emocao):
     return item["reflexao"], item["acao"], item["pergunta"]
 
 # Interface Streamlit
-st.set_page_config(page_title="My Deary", page_icon="🪞")
-st.title("🪞 My Deary – um amigo para seus desabafos")
+st.set_page_config(page_title="My Deary")
+st.title("Um amigo para seus desabafos. 'Uma versão em testes! :)'")
 
 texto = st.text_area("Escreva como você está se sentindo hoje:")
 
