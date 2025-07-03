@@ -64,6 +64,20 @@ palavras_tristeza = [
     "acabei", "acabou", "sumiu", "terminou", "quebrou", "partiu", "tristeza",
     "angústia", "angustiada", "angustiado", "desespero"
 ]
+palavras_risco = [
+    "me matar", "tirar minha vida", "acabar com tudo", "sumir pra sempre",
+    "me suicidar", "quero morrer", "não quero mais viver", "me jogar",
+    "desistir de tudo", "acabar com a dor", "dar fim a isso"
+]
+
+def detectar_risco(texto):
+    texto = texto.lower()
+    for frase in palavras_risco:
+        if frase in texto:
+            return True
+    return False
+
+
 def detectar_tristeza_manual(texto):
     for palavra in palavras_tristeza:
         if palavra in texto.lower():
@@ -71,6 +85,11 @@ def detectar_tristeza_manual(texto):
     return False
 
 if texto:
+    if detectar_risco(texto):
+        st.error("⚠️ Detectamos sinais de que você pode estar passando por um momento muito difícil.")
+        st.markdown("Você não está sozinha(o). Conversar com alguém pode ajudar.\n\nSe estiver no Brasil, você pode ligar gratuitamente para o **188** (CVV – 24h).")
+    st.stop()
+    
     emocao, confianca = analisar_emocao(texto)
     if emocao == "joy" and detectar_tristeza_manual(texto):
         emocao = "sadness"
