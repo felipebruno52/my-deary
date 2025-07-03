@@ -49,14 +49,31 @@ def gerar_resposta(emocao):
     item = respostas_emocionais[emocao]
     return item["reflexao"], item["acao"], item["pergunta"]
 
+
 # Interface Streamlit
 st.set_page_config(page_title="My Deary")
 st.title("Um amigo para seus desabafos. 'Uma versão em testes! :)'")
 
 texto = st.text_area("Escreva como você está se sentindo hoje:")
 
+palavras_tristeza = [
+    "morreu", "morte", "perdi", "luto", "saudade", "sozinha", "sozinho",
+    "triste", "chorei", "choro", "doeu", "dor", "vazio", "depressão", "desânimo",
+    "abatida", "abatido", "exausta", "exausto", "cansada", "cansado",
+    "insuportável", "injusto", "solidão", "falta", "abandono", "desisto",
+    "acabei", "acabou", "sumiu", "terminou", "quebrou", "partiu", "tristeza",
+    "angústia", "angustiada", "angustiado", "desespero"
+]
+def detectar_tristeza_manual(texto):
+    for palavra in palavras_tristeza:
+        if palavra in texto.lower():
+            return True
+    return False
+
 if texto:
     emocao, confianca = analisar_emocao(texto)
+    if emocao == "joy" and detectar_tristeza_manual(texto):
+        emocao = "sadness"
     st.markdown(f"**🧠 Emoção detectada:** `{emocao.capitalize()}` ({confianca*100:.2f}%)")
 
     reflexao, acao, pergunta = gerar_resposta(emocao)
