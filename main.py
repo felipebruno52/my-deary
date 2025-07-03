@@ -10,7 +10,7 @@ st.set_page_config(page_title="My Deary", page_icon="🐧", layout="centered")
 with open("styles/theme.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.image("assets/mascot.png", width=120, caption="Oi! Eu sou o Deary 🐧", use_column_width=False)
+st.image("assets/mascot.png", width=120, caption="Oi! Eu sou o Deary 🐧", use_container_width=False)
 
 st.title("Um amigo para seus desabafos 💗")
 st.markdown("_Versão em testes – aqui pra ouvir você com carinho._")
@@ -92,7 +92,7 @@ if texto:
     if detectar_risco(texto):
         st.error("⚠️ Detectamos sinais de que você pode estar passando por um momento muito difícil.")
         st.markdown("Você não está sozinha(o). Conversar com alguém pode ajudar.\n\nSe estiver no Brasil, você pode ligar gratuitamente para o **188** (CVV – 24h).")
-    st.stop()
+        st.stop()
 
     emocao, confianca = analisar_emocao(texto)
     if emocao == "joy" and detectar_tristeza_manual(texto):
