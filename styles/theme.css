@@ -1,60 +1,45 @@
 
+@font-face {
+    font-family: "VCR OSD Mono";
+    src: url("../assets/VCR_OSD_MONO_1.001.ttf") format("truetype");
+}
+
 body {
+    font-family: "VCR OSD Mono", monospace;
     background-color: #fff8f5;
-    color: #4d2c2c;
-    font-family: 'Segoe UI', 'Verdana', sans-serif;
+    color: #3a2d2d;
 }
 
 h1, h2, h3 {
-    color: #4d2c2c;
-    font-weight: 700;
+    color: #d18484;
+    text-shadow: 1px 1px 0 #fff;
 }
 
-textarea {
-    background-color: #fff1ec;
-    color: #4d2c2c;
-    border-radius: 10px;
-    border: 1px solid #ffd4c8;
-    padding: 10px;
+textarea, input, .stTextInput, .stTextArea {
+    font-family: "VCR OSD Mono", monospace !important;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2cfcf;
+    color: #333;
 }
 
 div.stMarkdown {
-    color: #4d2c2c !important;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-family: "VCR OSD Mono", monospace;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-section[data-testid="stSidebar"] {
-    background-color: #ffeae0;
-}
-
-h2 {
-    font-size: 1.4rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.stAlert {
-    background-color: #ffe5e5 !important;
-    border-left: 5px solid #ff6b6b !important;
-    color: #6b0000 !important;
-}
-
-button {
-    background-color: #ffd6d6;
-    color: #4d2c2c;
-    border-radius: 8px;
+.stButton>button {
+    background-color: #ffdcdc;
+    color: #3a2d2d;
     border: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: "VCR OSD Mono", monospace;
+    transition: background-color 0.3s ease;
 }
 
-a {
-    color: #c26580;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.stButton>button:hover {
+    background-color: #f2bebe;
+    cursor: pointer;
 }
